@@ -321,6 +321,13 @@
                     <p><strong>힌트:</strong> 현재완료 부정문에서 '아직 ~하지 않았다'는 의미로 문장 끝에 오는 부사는 무엇일까요?</p>
                 </div>
             </div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <button class="history-btn" onclick="goToMainScreen()">
+                    🏠 시작 메인으로 돌아가기
+                </button>
+            </div>
+            
         </div>
         
     </div>
@@ -334,11 +341,12 @@
         const totalQuestions = 10;
         const answeredQuestions = new Set();
         let userName = '';
-        const HISTORY_KEY = 'quizHistory_PresentPerfect';
+        const HISTORY_KEY = 'quizHistory_PresentPerfect'; // 로컬 테스트용 키
 
         document.addEventListener('DOMContentLoaded', () => {
-            // 초기 점수판 상태 설정
+            // 초기 점수판 상태 설정 및 화면 초기화
             document.getElementById('score-display').innerHTML = `총 문제: ${totalQuestions}개`;
+            document.getElementById('quiz-screen').style.display = 'none'; 
         });
         
         // ----------------------- 퀴즈 시작 및 화면 전환 -----------------------
@@ -354,10 +362,21 @@
             document.getElementById('history-display').style.display = 'none';
             document.getElementById('quiz-screen').style.display = 'block';
 
-            // 퀴즈 시작 시 상태 초기화
+            // 퀴즈 시작 시 상태 초기화 (새 퀴즈를 풀기 위해)
             correctCount = 0;
             answeredQuestions.clear();
             updateScoreDisplay();
+        }
+
+        // 메인 화면으로 돌아가는 함수 (새로 추가)
+        function goToMainScreen() {
+            // 모든 화면을 숨기고 intro-screen만 보이게 합니다.
+            document.getElementById('quiz-screen').style.display = 'none';
+            document.getElementById('history-display').style.display = 'none';
+            document.getElementById('intro-screen').style.display = 'block';
+            
+            // 퀴즈 화면의 상태를 리셋하려면 (선택 사항: 페이지 새로고침)
+            // window.location.reload(); 
         }
 
         function toggleHistory() {
@@ -397,45 +416,72 @@
             scoreElement.innerHTML = scoreMessage;
         }
 
-        // ----------------------- 히스토리 저장 및 로드 -----------------------
+        // ----------------------- 히스토리 저장 및 로드 (서버 통신) -----------------------
         function saveHistory(score, accuracy) {
-            // 로컬 스토리지에서 기존 기록 불러오기 (없으면 빈 배열)
-            const history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
-            const now = new Date();
-            
-            const newRecord = {
-                user: userName,
-                date: now.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' }),
-                time: now.toLocaleTimeString('ko-KR'),
+            const data = {
+                user_name: userName,
                 score: score,
                 accuracy: accuracy
             };
 
-            history.unshift(newRecord); // 가장 최근 기록을 맨 앞에 추가
-            localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+            fetch('/api/scores', {
+                method: 'POST', 
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                console.log('Server Save Success:', result.message);
+            })
+            .catch(error => {
+                console.error('Save Error:', error);
+                // Render 배포 실패 시 로컬 스토리지를 대체 수단으로 사용할 수 있습니다.
+            });
         }
 
         function loadHistory() {
-            const history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
             const historyList = document.getElementById('history-list');
             const historyStatus = document.getElementById('history-status');
-            
-            historyList.innerHTML = '';
-            
-            if (history.length === 0) {
-                historyStatus.innerHTML = '아직 기록된 문제풀이 이력이 없습니다.';
-                return;
-            }
+            historyList.innerHTML = '<li>서버에서 기록을 불러오는 중...</li>';
 
-            historyStatus.innerHTML = `총 ${history.length}건의 기록이 있습니다.`;
+            fetch('/api/scores')
+            .then(response => {
+                if (!response.ok) {
+                     // 서버에서 오류 응답 (예: 500 에러)이 온 경우
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(history => {
+                historyList.innerHTML = '';
 
-            history.forEach((record, index) => {
-                const listItem = document.createElement('li');
-                listItem.innerHTML = `
-                    <strong>${index + 1}. ${record.date} (${record.time})</strong><br>
-                    ${record.user}님: ${record.score} / ${totalQuestions} (${record.accuracy}%)
-                `;
-                historyList.appendChild(listItem);
+                if (history.length === 0) {
+                    historyStatus.innerHTML = '아직 기록된 문제풀이 이력이 없습니다.';
+                    return;
+                }
+
+                historyStatus.innerHTML = `총 ${history.length}건의 기록이 있습니다.`;
+
+                history.forEach((record, index) => {
+                    const listItem = document.createElement('li');
+                    
+                    // DB에서 가져온 날짜/시간 포맷을 사용자에게 친숙하게 변환 (PostgreSQL TIMESTAMP 형식에 따라 다름)
+                    const displayDate = record.date_time ? new Date(record.date_time).toLocaleDateString('ko-KR') : '날짜 불명';
+                    const displayTime = record.date_time ? new Date(record.date_time).toLocaleTimeString('ko-KR') : '';
+
+                    listItem.innerHTML = `
+                        <strong>${index + 1}. ${displayDate} (${displayTime})</strong><br>
+                        ${record.user_name}님: ${record.score} / ${totalQuestions} (${record.accuracy}%)
+                    `;
+                    historyList.appendChild(listItem);
+                });
+            })
+            .catch(error => {
+                console.error('Load Error:', error);
+                historyStatus.innerHTML = '기록 로드 중 서버 오류가 발생했습니다. (연결 확인 필요)';
+                historyList.innerHTML = '';
             });
         }
 
@@ -444,16 +490,16 @@
             const optionsList = document.getElementById(`q${qNum}_options`);
             const feedbackBox = document.getElementById(`q${qNum}_feedback`);
             
-            if (answeredQuestions.has(qNum)) return; // 이미 답변한 문제라면 실행 종료
+            if (answeredQuestions.has(qNum)) return; 
 
             // 1. 점수 계산 및 기록
             if (isCorrect) {
                 correctCount++;
             }
             answeredQuestions.add(qNum);
-            updateScoreDisplay(); // 점수 업데이트
+            updateScoreDisplay(); 
 
-            // 2. 모든 옵션을 비활성화 (더 이상 선택 못하게 함)
+            // 2. 모든 옵션을 비활성화
             const allOptions = optionsList.getElementsByTagName('li');
             for (let i = 0; i < allOptions.length; i++) {
                 allOptions[i].classList.add('disabled');
@@ -466,7 +512,6 @@
             } else {
                 selectedElement.classList.add('incorrect');
                 
-                // 틀렸다면 정답을 찾아서 초록색으로 표시
                 for (let i = 0; i < allOptions.length; i++) {
                     if (allOptions[i].getAttribute('onclick').includes(', true)')) {
                         allOptions[i].classList.add('correct');
