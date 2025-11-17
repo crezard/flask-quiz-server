@@ -54,26 +54,7 @@
         .start-btn:hover { background-color: #2980b9; }
         .history-btn:hover { background-color: #27ae60; }
 
-        /* 2. 이전 기록 보기 버튼 줄넘김 및 여백 추가 */
-        #intro-screen button.history-btn {
-            margin-left: 0; 
-            margin-top: 15px;
-            display: block;
-            width: 100%;
-        }
-        /* 3. 메인으로 돌아가기 버튼 크기 및 여백 증가 */
-        #main-return-btn {
-            text-align: center; 
-            margin-top: 30px; 
-            margin-bottom: 30px; 
-        }
-        #main-return-btn button {
-            padding: 15px 30px; 
-            font-size: 1.1em; 
-            box-shadow: 0 4px 6px rgba(0,0,0,0.15); 
-        }
-
-        /* Quiz Styles (나머지 스타일은 기존과 동일) */
+        /* Quiz Styles */
         .question-box {
             background-color: #ffffff;
             border: 1px solid #ddd;
@@ -165,7 +146,6 @@
         #history-list li {
             border-bottom: 1px dashed #ccc;
             padding: 10px 0;
-            font-size: 0.9em;
         }
         #history-list li:last-child { border-bottom: none; }
     </style>
@@ -218,6 +198,7 @@
                 </ul>
                 <div id="q2_feedback" class="feedback-message">
                     <p><strong>설명:</strong> 주어 'I'에 맞는 'have'와 동사 'eat'의 과거분사 'eaten'을 사용하여 '이미 저녁을 먹었다'는 완료의 의미를 정확히 나타냅니다. (<strong class="correct-answer">정답: have eaten</strong>)</p>
+                    <p><strong>힌트:</strong> 'I'에 맞는 have 동사를 선택하고, 'eat'의 불규칙 과거분사 형태를 떠올려 보세요.</p>
                 </div>
             </div>
             
@@ -232,6 +213,7 @@
                 </ul>
                 <div id="q3_feedback" class="feedback-message">
                     <p><strong>설명:</strong> 주어 'She'에 맞는 'has'와 'never'가 결합하여 '한 번도 가본 적이 없다'는 부정 경험을 정확히 표현합니다. (<strong class="correct-answer">정답: has never been</strong>)</p>
+                    <p><strong>힌트:</strong> 주어에 맞는 'have' 형태를 사용하고, 부사 'never'의 위치와 'be' 동사의 과거분사 형태를 확인하세요.</p>
                 </div>
             </div>
             
@@ -246,6 +228,7 @@
                 </ul>
                 <div id="q4_feedback" class="feedback-message">
                     <p><strong>설명:</strong> 'since'는 특정 시점(2018년)부터 현재까지 계속되었음을 나타내므로 현재완료의 계속 용법과 함께 사용하기 적절합니다. (<strong class="correct-answer">정답: since</strong>)</p>
+                    <p><strong>힌트:</strong> 현재완료의 계속 용법에서 '특정 시점부터'를 나타내는 전치사는 무엇일까요?</p>
                 </div>
             </div>
             
@@ -260,6 +243,7 @@
                 </ul>
                 <div id="q5_feedback" class="feedback-message">
                     <p><strong>설명:</strong> 'go'의 현재완료형 'has gone'은 '어디로 가버려서 지금 여기에 없다'는 결과를 나타내는 용법으로 적절합니다. (<strong class="correct-answer">정답: has gone</strong>)</p>
+                    <p><strong>힌트:</strong> '가버려서 지금 여기에 없다'는 결과를 나타내는 'go'의 현재완료 형태를 떠올려 보세요. ('가본 적이 있다'와 구별)</p>
                 </div>
             </div>
 
@@ -274,6 +258,7 @@
                 </ul>
                 <div id="q6_feedback" class="feedback-message">
                     <p><strong>설명:</strong> 'just'는 '막, 방금'이라는 의미로, 현재완료의 완료 용법에서 동작이 방금 끝났음을 나타내기에 가장 적절합니다. (<strong class="correct-answer">정답: just</strong>)</p>
+                    <p><strong>힌트:</strong> 동작이 '방금' 완료되었음을 나타내는 현재완료 완료 용법의 핵심 부사를 선택하세요.</p>
                 </div>
             </div>
             
@@ -288,6 +273,7 @@
                 </ul>
                 <div id="q7_feedback" class="feedback-message">
                     <p><strong>설명:</strong> 동사 'see'의 과거분사 형태인 'seen'을 사용하여 '귀신을 본 경험이 있니?'라는 현재완료 경험 용법을 완성합니다. (<strong class="correct-answer">정답: seen</strong>)</p>
+                    <p><strong>힌트:</strong> 현재완료 시제는 'have/has' 뒤에 동사의 어떤 형태를 써야 하는지 기억하세요.</p>
                 </div>
             </div>
             
@@ -302,6 +288,7 @@
                 </ul>
                 <div id="q8_feedback" class="feedback-message">
                     <p><strong>설명:</strong> 'How long'은 현재완료 계속 용법의 의문문으로 자주 사용되며, 'have'와 'know'의 과거분사 'known'으로 정확한 형태를 구성합니다. (<strong class="correct-answer">정답: have / known</strong>)</p>
+                    <p><strong>힌트:</strong> 'How long'이 들어가는 의문문은 대부분 현재완료 시제이며, 'know'의 불규칙 과거분사 형태를 사용합니다.</p>
                 </div>
             </div>
             
@@ -309,4 +296,233 @@
                 <span class="question-number">9번</span>
                 <p class="question-text">다음 문장의 빈칸에 알맞은 현재완료형은? (They ___ (lose) their keys.)</p>
                 <ul id="q9_options" class="options-list">
-                    <li onclick
+                    <li onclick="checkAnswer(9, this, false)">have lose</li>
+                    <li onclick="checkAnswer(9, this, false)">has lost</li>
+                    <li onclick="checkAnswer(9, this, false)">lost</li>
+                    <li onclick="checkAnswer(9, this, true)">have lost</li>
+                </ul>
+                <div id="q9_feedback" class="feedback-message">
+                    <p><strong>설명:</strong> 주어 'They'에 맞는 'have'와 'lose'의 과거분사 'lost'를 사용하여 '열쇠를 잃어버려서 지금도 없다'는 결과를 나타냅니다. (<strong class="correct-answer">정답: have lost</strong>)</p>
+                    <p><strong>힌트:</strong> 'They'에 맞는 have 동사를 선택하고, 'lose'의 과거분사 형태를 사용하세요. (지금도 영향을 미치는 '결과' 용법입니다.)</p>
+                </div>
+            </div>
+            
+            <div class="question-box">
+                <span class="question-number">10번</span>
+                <p class="question-text">빈칸에 알맞은 단어는? (I haven't watched the movie ___.)</p>
+                <ul id="q10_options" class="options-list">
+                    <li onclick="checkAnswer(10, this, false)">already</li>
+                    <li onclick="checkAnswer(10, this, false)">just</li>
+                    <li onclick="checkAnswer(10, this, false)">before</li>
+                    <li onclick="checkAnswer(10, this, true)">yet</li>
+                </ul>
+                <div id="q10_feedback" class="feedback-message">
+                    <p><strong>설명:</strong> 'yet'은 '아직'이라는 뜻으로, 현재완료의 부정문에서 완료 용법을 나타내기에 적절하며 문장 끝에 위치합니다. (<strong class="correct-answer">정답: yet</strong>)</p>
+                    <p><strong>힌트:</strong> 현재완료 부정문에서 '아직 ~하지 않았다'는 의미로 문장 끝에 오는 부사는 무엇일까요?</p>
+                </div>
+            </div>
+            
+            <div id="main-return-btn" style="text-align: center; margin-top: 30px; display: none;">
+                <button class="history-btn" onclick="goToMainScreen()">
+                    🏠 시작 메인으로 돌아가기
+                </button>
+            </div>
+            
+        </div>
+        
+    </div>
+
+    <div class="score-box">
+        <h2 id="score-display"></h2>
+    </div>
+
+    <script>
+        let correctCount = 0;
+        const totalQuestions = 10;
+        const answeredQuestions = new Set();
+        let userName = '';
+        const HISTORY_KEY = 'quizHistory_PresentPerfect';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // 초기 점수판 상태 설정 및 화면 초기화
+            document.getElementById('score-display').innerHTML = `총 문제: ${totalQuestions}개`;
+            document.getElementById('quiz-screen').style.display = 'none'; 
+        });
+        
+        // ----------------------- 퀴즈 시작 및 화면 전환 -----------------------
+        function startQuiz() {
+            userName = document.getElementById('user-name-input').value.trim();
+            if (userName.length === 0) {
+                alert('이름을 입력해주세요.');
+                return;
+            }
+
+            document.getElementById('welcome-name').innerText = userName;
+            document.getElementById('intro-screen').style.display = 'none';
+            document.getElementById('history-display').style.display = 'none';
+            document.getElementById('quiz-screen').style.display = 'block';
+
+            // 퀴즈 시작 시 상태 초기화 (새 퀴즈를 풀기 위해)
+            correctCount = 0;
+            answeredQuestions.clear();
+            updateScoreDisplay();
+        }
+
+        // 메인 화면으로 돌아가는 함수 (새로 추가)
+        function goToMainScreen() {
+            document.getElementById('quiz-screen').style.display = 'none';
+            document.getElementById('history-display').style.display = 'none';
+            document.getElementById('intro-screen').style.display = 'block';
+        }
+
+        function toggleHistory() {
+            const introScreen = document.getElementById('intro-screen');
+            const historyScreen = document.getElementById('history-display');
+            const quizScreen = document.getElementById('quiz-screen');
+            
+            if (historyScreen.style.display === 'none') {
+                introScreen.style.display = 'none';
+                quizScreen.style.display = 'none';
+                historyScreen.style.display = 'block';
+                loadHistory();
+            } else {
+                historyScreen.style.display = 'none';
+                introScreen.style.display = 'block';
+            }
+        }
+
+        // ----------------------- 점수 계산 및 표시 -----------------------
+        function updateScoreDisplay() {
+            const totalAttempted = answeredQuestions.size;
+            let percentage = 0.0;
+            
+            if (totalAttempted > 0) {
+                percentage = ((correctCount / totalAttempted) * 100).toFixed(1);
+            }
+            
+            const scoreElement = document.getElementById('score-display');
+            const returnBtn = document.getElementById('main-return-btn');
+            
+            let scoreMessage = `현재 정답률: ${correctCount} / ${totalQuestions} 문항 중 ${totalAttempted} 문항 시도 (${percentage}%)`;
+            
+            if (totalAttempted === totalQuestions) {
+                scoreMessage += `<br>🎉 **모든 문제를 완료했습니다!** 기록이 저장되었습니다.`;
+                saveHistory(correctCount, percentage);
+                // 🚨 완료 시 버튼을 보이게 함
+                returnBtn.style.display = 'block'; 
+            } else {
+                // 퀴즈 도중에는 버튼을 숨김
+                returnBtn.style.display = 'none';
+            }
+            
+            scoreElement.innerHTML = scoreMessage;
+        }
+
+        // ----------------------- 히스토리 저장 및 로드 (서버 통신) -----------------------
+        function saveHistory(score, accuracy) {
+            const data = {
+                user_name: userName,
+                score: score,
+                accuracy: accuracy
+            };
+
+            fetch('/api/scores', {
+                method: 'POST', 
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                console.log('Server Save Success:', result.message);
+            })
+            .catch(error => {
+                console.error('Save Error:', error);
+            });
+        }
+
+        function loadHistory() {
+            const historyList = document.getElementById('history-list');
+            const historyStatus = document.getElementById('history-status');
+            historyList.innerHTML = '<li>서버에서 기록을 불러오는 중...</li>';
+
+            fetch('/api/scores')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(history => {
+                historyList.innerHTML = '';
+
+                if (history.length === 0) {
+                    historyStatus.innerHTML = '아직 기록된 문제풀이 이력이 없습니다.';
+                    return;
+                }
+
+                historyStatus.innerHTML = `총 ${history.length}건의 기록이 있습니다.`;
+
+                history.forEach((record, index) => {
+                    const listItem = document.createElement('li');
+                    
+                    const displayDate = record.date_time ? new Date(record.date_time).toLocaleDateString('ko-KR') : '날짜 불명';
+                    const displayTime = record.date_time ? new Date(record.date_time).toLocaleTimeString('ko-KR') : '';
+
+                    listItem.innerHTML = `
+                        <strong>${index + 1}. ${displayDate} (${displayTime})</strong><br>
+                        ${record.user_name}님: ${record.score} / ${totalQuestions} (${record.accuracy}%)
+                    `;
+                    historyList.appendChild(listItem);
+                });
+            })
+            .catch(error => {
+                console.error('Load Error:', error);
+                historyStatus.innerHTML = '기록 로드 중 서버 오류가 발생했습니다. (연결 확인 필요)';
+                historyList.innerHTML = '';
+            });
+        }
+
+        // ----------------------- 퀴즈 체크 로직 -----------------------
+        function checkAnswer(qNum, selectedElement, isCorrect) {
+            const optionsList = document.getElementById(`q${qNum}_options`);
+            const feedbackBox = document.getElementById(`q${qNum}_feedback`);
+            
+            if (answeredQuestions.has(qNum)) return; 
+
+            // 1. 점수 계산 및 기록
+            if (isCorrect) {
+                correctCount++;
+            }
+            answeredQuestions.add(qNum);
+            updateScoreDisplay(); 
+
+            // 2. 모든 옵션을 비활성화
+            const allOptions = optionsList.getElementsByTagName('li');
+            for (let i = 0; i < allOptions.length; i++) {
+                allOptions[i].classList.add('disabled');
+            }
+
+            // 3. 선택한 옵션 피드백 및 스타일 변경
+            if (isCorrect) {
+                selectedElement.classList.remove('disabled');
+                selectedElement.classList.add('correct');
+            } else {
+                selectedElement.classList.add('incorrect');
+                
+                for (let i = 0; i < allOptions.length; i++) {
+                    if (allOptions[i].getAttribute('onclick').includes(', true)')) {
+                        allOptions[i].classList.add('correct');
+                        allOptions[i].classList.remove('disabled');
+                        break;
+                    }
+                }
+            }
+            
+            // 4. 해설 박스 표시
+            feedbackBox.classList.add('show');
+        }
+    </script>
+</body>
+</html>
