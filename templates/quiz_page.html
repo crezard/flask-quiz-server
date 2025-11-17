@@ -322,7 +322,7 @@
                 </div>
             </div>
             
-            <div style="text-align: center; margin-top: 30px;">
+            <div id="main-return-btn" style="text-align: center; margin-top: 30px; display: none;">
                 <button class="history-btn" onclick="goToMainScreen()">
                     🏠 시작 메인으로 돌아가기
                 </button>
@@ -341,7 +341,7 @@
         const totalQuestions = 10;
         const answeredQuestions = new Set();
         let userName = '';
-        const HISTORY_KEY = 'quizHistory_PresentPerfect'; // 로컬 테스트용 키
+        const HISTORY_KEY = 'quizHistory_PresentPerfect';
 
         document.addEventListener('DOMContentLoaded', () => {
             // 초기 점수판 상태 설정 및 화면 초기화
@@ -370,13 +370,9 @@
 
         // 메인 화면으로 돌아가는 함수 (새로 추가)
         function goToMainScreen() {
-            // 모든 화면을 숨기고 intro-screen만 보이게 합니다.
             document.getElementById('quiz-screen').style.display = 'none';
             document.getElementById('history-display').style.display = 'none';
             document.getElementById('intro-screen').style.display = 'block';
-            
-            // 퀴즈 화면의 상태를 리셋하려면 (선택 사항: 페이지 새로고침)
-            // window.location.reload(); 
         }
 
         function toggleHistory() {
@@ -405,12 +401,18 @@
             }
             
             const scoreElement = document.getElementById('score-display');
+            const returnBtn = document.getElementById('main-return-btn');
             
             let scoreMessage = `현재 정답률: ${correctCount} / ${totalQuestions} 문항 중 ${totalAttempted} 문항 시도 (${percentage}%)`;
             
             if (totalAttempted === totalQuestions) {
                 scoreMessage += `<br>🎉 **모든 문제를 완료했습니다!** 기록이 저장되었습니다.`;
-                saveHistory(correctCount, percentage); // 완료 시 기록 저장
+                saveHistory(correctCount, percentage);
+                // 🚨 완료 시 버튼을 보이게 함
+                returnBtn.style.display = 'block'; 
+            } else {
+                // 퀴즈 도중에는 버튼을 숨김
+                returnBtn.style.display = 'none';
             }
             
             scoreElement.innerHTML = scoreMessage;
@@ -437,7 +439,6 @@
             })
             .catch(error => {
                 console.error('Save Error:', error);
-                // Render 배포 실패 시 로컬 스토리지를 대체 수단으로 사용할 수 있습니다.
             });
         }
 
@@ -449,7 +450,6 @@
             fetch('/api/scores')
             .then(response => {
                 if (!response.ok) {
-                     // 서버에서 오류 응답 (예: 500 에러)이 온 경우
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 return response.json();
@@ -467,7 +467,6 @@
                 history.forEach((record, index) => {
                     const listItem = document.createElement('li');
                     
-                    // DB에서 가져온 날짜/시간 포맷을 사용자에게 친숙하게 변환 (PostgreSQL TIMESTAMP 형식에 따라 다름)
                     const displayDate = record.date_time ? new Date(record.date_time).toLocaleDateString('ko-KR') : '날짜 불명';
                     const displayTime = record.date_time ? new Date(record.date_time).toLocaleTimeString('ko-KR') : '';
 
