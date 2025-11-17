@@ -165,6 +165,7 @@
         #history-list li {
             border-bottom: 1px dashed #ccc;
             padding: 10px 0;
+            font-size: 0.9em;
         }
         #history-list li:last-child { border-bottom: none; }
     </style>
@@ -271,4 +272,41 @@
                     <li onclick="checkAnswer(6, this, false)">last week</li>
                     <li onclick="checkAnswer(6, this, false)">never</li>
                 </ul>
-                <div id="q6_feedback
+                <div id="q6_feedback" class="feedback-message">
+                    <p><strong>설명:</strong> 'just'는 '막, 방금'이라는 의미로, 현재완료의 완료 용법에서 동작이 방금 끝났음을 나타내기에 가장 적절합니다. (<strong class="correct-answer">정답: just</strong>)</p>
+                </div>
+            </div>
+            
+            <div class="question-box">
+                <span class="question-number">7번</span>
+                <p class="question-text">빈칸에 알맞은 동사 형태는? (Have you ever ___ (see) a ghost?)</p>
+                <ul id="q7_options" class="options-list">
+                    <li onclick="checkAnswer(7, this, false)">saw</li>
+                    <li onclick="checkAnswer(7, this, false)">see</li>
+                    <li onclick="checkAnswer(7, this, true)">seen</li>
+                    <li onclick="checkAnswer(7, this, false)">seeing</li>
+                </ul>
+                <div id="q7_feedback" class="feedback-message">
+                    <p><strong>설명:</strong> 동사 'see'의 과거분사 형태인 'seen'을 사용하여 '귀신을 본 경험이 있니?'라는 현재완료 경험 용법을 완성합니다. (<strong class="correct-answer">정답: seen</strong>)</p>
+                </div>
+            </div>
+            
+            <div class="question-box">
+                <span class="question-number">8번</span>
+                <p class="question-text">빈칸에 알맞은 현재완료 형태는? (How long ___ you ___ (know) him?)</p>
+                <ul id="q8_options" class="options-list">
+                    <li onclick="checkAnswer(8, this, false)">did / know</li>
+                    <li onclick="checkAnswer(8, this, false)">do / know</li>
+                    <li onclick="checkAnswer(8, this, false)">have / knew</li>
+                    <li onclick="checkAnswer(8, this, true)">have / known</li>
+                </ul>
+                <div id="q8_feedback" class="feedback-message">
+                    <p><strong>설명:</strong> 'How long'은 현재완료 계속 용법의 의문문으로 자주 사용되며, 'have'와 'know'의 과거분사 'known'으로 정확한 형태를 구성합니다. (<strong class="correct-answer">정답: have / known</strong>)</p>
+                </div>
+            </div>
+            
+            <div class="question-box">
+                <span class="question-number">9번</span>
+                <p class="question-text">다음 문장의 빈칸에 알맞은 현재완료형은? (They ___ (lose) their keys.)</p>
+                <ul id="q9_options" class="options-list">
+                    <li onclick
